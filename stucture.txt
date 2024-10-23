@@ -1,0 +1,20 @@
+Here's the table in a simple, copiable format:
+
+| **Service**        | **Produce Topic**  | **Consume Topic**    | **Database Impact**                                                                                           |
+|--------------------|--------------------|----------------------|----------------------------------------------------------------------------------------------------------------|
+| **User Service**    | `user-created`     | `order-placed`       | **On Produce**: Saves new user details in the `user-collection`.                                               |
+|                    |                    |                      | **On Consume**: Updates user’s purchase history in `user-collection` when consuming `order-placed` topic.      |
+| **Product Service** | `product-updated`  | `order-placed`       | **On Produce**: Saves or updates product details in the `product-collection`.                                  |
+|                    |                    |                      | **On Consume**: Updates product inventory in `product-collection` when consuming `order-placed` topic.         |
+| **Order Service**   | `order-placed`     | `product-updated`, `user-created` | **On Produce**: Saves order details in the `order-collection` and produces `order-placed` topic.               |
+|                    |                    |                      | **On Consume**: Links user to orders from `user-created`, updates product info from `product-updated` topic.    |
+
+
+
+Here's the table in a copiable format:
+
+| **Service**         | **Responsibilities**                                           | **Associated Collection(s)**                          |
+|---------------------|----------------------------------------------------------------|------------------------------------------------------|
+| **User Service**     | User management (CRUD), authentication, fetching user orders   | **user-collection**                                  |
+| **Product Service**  | Product management (CRUD), stock, and price updates            | **product-collection**                               |
+| **Order Service**    | Order creation, status updates, fetch orders by user/status    | **order-collection**, **product-collection**, **user-collection** (for customer details) |
