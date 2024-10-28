@@ -9,7 +9,9 @@ export const signUp = async (req, res) => {
     const { name, email, phone, password } = req.body;
     const userExist = await User.findOne({ email });
     if (userExist)
-      return res.status(500).send("User is Already Registered :::");
+      return res
+        .status(500)
+        .send({ message: "User is Already Registered :::", userExist: true });
     const salt = await genSalt(10);
     const hashedPwd = await hash(password, salt);
     const newUser = new User({
@@ -38,7 +40,12 @@ export const signUp = async (req, res) => {
         httpOnly: true,
         maxAge: 60 * 60 * 24 * 1000,
       })
-      .send({ message: "User Registered Successfully :", token });
+      .send({
+        message: "User Registered Successfully :",
+        token,
+        registered: true,
+        userDet: message,
+      });
   } catch (error) {
     console.log("err in Signup Process :", error);
     res.status(500).json({ error: "Error is happening while SignUp" });
@@ -50,11 +57,16 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(500).send("User is Not Exists ! Try Register.");
+      res.status(500).send({
+        message: "User is Not Exists ! Try Register.",
+        notExist: true,
+      });
     }
     const passwordMatch = pkg.compare(password, user.password);
     if (!passwordMatch) {
-      res.status(500).send("Password Mismatch !!");
+      res
+        .status(500)
+        .send({ message: "Password Mismatch !!", passwordMismatch: true });
     }
     const token = jwt.sign({ id: user._id, email }, process.env.JWT_KEY, {
       expiresIn: "1h",
@@ -62,7 +74,12 @@ export const login = async (req, res) => {
     res
       .status(200)
       .cookie("token", token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000 })
-      .send({ message: "User Logged In :)", token });
+      .send({
+        message: "User Logged In :)",
+        token: token,
+        logged: true,
+        userDet: user,
+      });
   } catch (error) {
     console.log("Error While Login :-: ", error);
     res.status(500).send("Error Interrup while login :", error);

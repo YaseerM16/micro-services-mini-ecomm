@@ -8,9 +8,10 @@ export const createProduct = async (req, res) => {
     const { title, price, stock } = req.body;
     const existProd = await Product.findOne({ title });
     if (existProd) {
-      return res
-        .status(500)
-        .send("Product Already Exists ! Please Look for Stock Increment :");
+      return res.status(409).send({
+        message: "Product Already Exists ! Please Look for Stock Increment :",
+        exist: true,
+      });
     }
     const insertProd = new Product({
       title,
@@ -27,6 +28,7 @@ export const createProduct = async (req, res) => {
     return res.status(200).send({
       message: "Product Created Successfully  :)",
       product: insertProd,
+      created: true,
     });
   } catch (error) {
     console.log("Error WHile Createing the Product :(", error);
@@ -65,7 +67,9 @@ export const updateProduct = async (req, res) => {
 export const getProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    res.status(200).send("Here are the products :", products);
+    res
+      .status(200)
+      .send({ message: "Here are the products :", products: products });
   } catch (error) {
     res.status(500).send("Internal Serval Error :(");
   }
