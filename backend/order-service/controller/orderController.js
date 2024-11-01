@@ -6,6 +6,7 @@ Order;
 export const orderProduct = async (req, res) => {
   try {
     const { productTitle, email } = req.body;
+
     const product = await Product.findOne({ title: productTitle });
     if (!product) {
       return res.status(404).send({ message: "Product not found" });
@@ -35,7 +36,6 @@ export const orderProduct = async (req, res) => {
 export const getOrders = async (req, res) => {
   try {
     const { userEmail } = req.params; // Assuming userId is passed as a URL parameter
-    console.log();
 
     // Validate the userId
     const user = await User.findOne({ email: userEmail });

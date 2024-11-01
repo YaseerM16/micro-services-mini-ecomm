@@ -1,20 +1,16 @@
-# Dockerfile for user-service
-FROM node:14
 
-# Set the working directory
+FROM node:alpine
+
+
 WORKDIR /app
 
-# Copy package.json and package-lock.json first
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code
 COPY . .
 
-# Expose the application port
+
+RUN npm install
+
+
 EXPOSE 3001
 
-# Command to run the application
+
 CMD ["npm", "start"]

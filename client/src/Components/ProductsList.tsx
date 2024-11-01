@@ -27,6 +27,8 @@ const ProductList: React.FC = () => {
         const fetchProducts = async () => {
             try {
                 const response = await axios.get("http://localhost:5000/api/product-service/get-products");
+                console.log("REsponse of product-List :", response.data);
+
                 setProducts(response.data.products); // Assuming response.data contains the products array
             } catch (error) {
                 console.error("Error fetching products:", error);

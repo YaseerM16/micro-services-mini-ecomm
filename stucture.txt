@@ -18,3 +18,15 @@ Here's the table in a copiable format:
 | **User Service**     | User management (CRUD), authentication, fetching user orders   | **user-collection**                                  |
 | **Product Service**  | Product management (CRUD), stock, and price updates            | **product-collection**                               |
 | **Order Service**    | Order creation, status updates, fetch orders by user/status    | **order-collection**, **product-collection**, **user-collection** (for customer details) |
+
+
+```
+myapp/
+      backend/
+           user-service/
+            order-service/
+            product-service/
+            api-gateway/
+      client/
+     docker-compose.yml
+```
