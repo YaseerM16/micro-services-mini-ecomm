@@ -31,5 +31,25 @@ jobs:
           docker build -t $DOCKER_USERNAME/user-service:latest -f ./backend/user-service/Dockerfile ./backend/user-service
           docker push $DOCKER_USERNAME/user-service:latest
 
+      - name: Build and Push product-service Image
+        run: |
+          docker build -t $DOCKER_USERNAME/product-service:latest -f ./backend/product-service/Dockerfile ./backend/product-service
+          docker push $DOCKER_USERNAME/product-service:latest
+
+      - name: Build and Push order-service Image
+        run: |
+          docker build -t $DOCKER_USERNAME/order-service:latest -f ./backend/order-service/Dockerfile ./backend/order-service
+          docker push $DOCKER_USERNAME/order-service:latest
+
+      - name: Build and Push api-gateway Image
+        run: |
+          docker build -t $DOCKER_USERNAME/api-gateway:latest -f ./backend/api-gateway/Dockerfile ./backend/api-gateway
+          docker push $DOCKER_USERNAME/api-gateway:latest
+
+      - name: Build and Push client Image
+        run: |
+          docker build -t $DOCKER_USERNAME/client:latest -f ./backend/client/Dockerfile ./client
+          docker push $DOCKER_USERNAME/client:latest
+
       - name: Log out from Docker Hub
         run: docker logout
