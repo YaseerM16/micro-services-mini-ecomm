@@ -28,8 +28,8 @@ jobs:
 
       - name: Build and Push user-service Image
         run: |
-          docker build -t $DOCKER_USERNAME/mini-ecomm/user-service:latest -f ./backend/user-service/Dockerfile ./backend/user-service
-          docker push $DOCKER_USERNAME/mini-ecomm/user-service:latest
+          docker build -t $DOCKER_USERNAME/user-service:latest -f ./backend/user-service/Dockerfile ./backend/user-service
+          docker push $DOCKER_USERNAME/user-service:latest
 
       - name: Log out from Docker Hub
         run: docker logout
