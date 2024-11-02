@@ -11,6 +11,9 @@ app.use(
   createProxyMiddleware({
     target: "http://localhost:3000",
     changeOrigin: true,
+    pathRewrite: {
+      "^/api/user-service": "", // This rewrites the path, so the request to the user service will not include the proxy prefix
+    },
   })
 );
 
