@@ -45,6 +45,10 @@ jobs:
         run: |
           ls -la ./client
 
+      - name: Rename DockerFile to Dockerfile
+        run: |
+          mv ./client/DockerFile ./client/Dockerfile
+
       - name: Build and Push api-gateway Image
         run: |
           docker build -t $DOCKER_USERNAME/api-gateway:latest -f ./backend/api-gateway/Dockerfile ./backend/api-gateway
