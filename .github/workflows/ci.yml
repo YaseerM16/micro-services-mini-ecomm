@@ -46,10 +46,5 @@ jobs:
           docker build -t $DOCKER_USERNAME/api-gateway:latest -f ./backend/api-gateway/Dockerfile ./backend/api-gateway
           docker push $DOCKER_USERNAME/api-gateway:latest
 
-      - name: Build and Push client Image
-        run: |
-          docker build -t $DOCKER_USERNAME/client:latest -f ./client/Dockerfile ./client
-          docker push $DOCKER_USERNAME/client:latest
-
       - name: Log out from Docker Hub
         run: docker logout
