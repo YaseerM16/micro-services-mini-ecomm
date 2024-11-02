@@ -30,5 +30,6 @@ app.use(
   })
 );
 
+//this is for the dommy commit ::
 app.get("/", (req, res) => res.send("Api-Gateway is Running :-"));
 app.listen(port, () => console.log(`Api Gate way listening on port ${port}!`));

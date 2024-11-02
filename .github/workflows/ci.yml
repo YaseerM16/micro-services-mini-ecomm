@@ -3,7 +3,7 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - main # Change to your main branch name if different
+      - main # Change to your main branch name if diff
   pull_request:
     branches:
       - main
