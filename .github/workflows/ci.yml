@@ -48,7 +48,7 @@ jobs:
 
       - name: Build and Push client Image
         run: |
-          docker build -t $DOCKER_USERNAME/client:latest ./client/Dockerfile 
+          docker build -t $DOCKER_USERNAME/client:latest ./client 
           docker push $DOCKER_USERNAME/client:latest
 
       - name: Log out from Docker Hub
