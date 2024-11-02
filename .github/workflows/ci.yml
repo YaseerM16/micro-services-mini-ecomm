@@ -41,6 +41,10 @@ jobs:
           docker build -t $DOCKER_USERNAME/order-service:latest -f ./backend/order-service/Dockerfile ./backend/order-service
           docker push $DOCKER_USERNAME/order-service:latest
 
+      - name: List client directory
+        run: |
+          ls -la ./client
+
       - name: Build and Push api-gateway Image
         run: |
           docker build -t $DOCKER_USERNAME/api-gateway:latest -f ./backend/api-gateway/Dockerfile ./backend/api-gateway
@@ -48,7 +52,7 @@ jobs:
 
       - name: Build and Push client Image
         run: |
-          docker build -t $DOCKER_USERNAME/client:latest -f ./client/Dockerfile ./client
+          docker build -t $DOCKER_USERNAME/client:latest ./client
           docker push $DOCKER_USERNAME/client:latest
 
       - name: Log out from Docker Hub
