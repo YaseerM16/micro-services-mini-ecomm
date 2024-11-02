@@ -1,7 +1,0 @@
-node_modules
-build
-.dockerignore
-npm-debug.log
-*.md
-.git
-.gitignore
